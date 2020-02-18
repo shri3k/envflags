@@ -1,0 +1,19 @@
+{
+  "name": "envflags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "jest": "^24.9.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
