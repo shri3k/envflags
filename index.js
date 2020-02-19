@@ -12,7 +12,6 @@ const DEFAULT_OPTS = {
  */
 function main(dotenvConfig = {}, opts = DEFAULT_OPTS) {
   const flagMaps = getFlagMap(dotenvConfig);
-
   const parser = new argparse.ArgumentParser(opts);
 
   for (let [_, v] of Object.entries(flagMaps)) {

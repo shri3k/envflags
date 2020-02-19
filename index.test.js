@@ -1,7 +1,28 @@
 const dotenv = require('dotenv');
-const envflags = require('./index');
-const { parsed } = dotenv.config();
+const argparse = require('argparse');
 
-it('should display flagmaps', () => {
-  console.log(envflags(parsed));
+const envflags = require('./index');
+
+it('should be and instance of argparse parser', () => {
+  const parser = argparse.ArgumentParser();
+  parser.addArgument(['-p', '--port'], {
+    defaultValue: true,
+  });
+  parser.addArgument(['-u', '--url'], {
+    defaultValue: true,
+  });
+  expect(envflags({ PORT: 8080, URL: 'https:mydomain.com' })).toBeInstanceOf(parser);
+});
+
+it('should match value of argparse', () => {
+  const parser = argparse.ArgumentParser();
+  parser.addArgument(['-i', '--ignore'], {
+    defaultValue: true,
+  });
+  parser.addArgument(['-p', '--port'], {
+    defaultValue: 8080,
+  });
+  const argValues = parser.parseArgs();
+  const envFlagValues = envflags({ PORT: 8080, ignore: true }).parseArgs();
+  expect(envFlagValues).toMatchObject(argValues);
 });

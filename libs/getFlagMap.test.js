@@ -1,5 +1,20 @@
 const getFlagMap = require('./getFlagMap');
 
-it('should get flatmap', () => {
-  console.log(getFlagMap({ HELLO: 'world', GOODBYE: 'universe' }));
+it('should match object ', () => {
+  expect(
+    getFlagMap({
+      USERNAME: 'username',
+      PASSWORD: 'password',
+      port: 8080,
+    }),
+  ).toMatchObject({
+    USERNAME: {
+      flag: ['-u', '--username'],
+      value: 'username',
+    },
+    PASSWORD: {
+      flag: ['-p', '--password'],
+      value: 'password',
+    },
+  });
 });
