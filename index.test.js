@@ -3,15 +3,18 @@ const argparse = require('argparse');
 
 const envflags = require('./index');
 
-it('should be and instance of argparse parser', () => {
+it('should throw an error if argparse instance is not given', () => {
+  expect(() => {
+    envflags({ API: 'somekeyofapi', VALUE: 'somevalue' });
+  }).toThrow();
+});
+
+it('should result in identical result from argparse', () => {
   const parser = argparse.ArgumentParser();
-  parser.addArgument(['-p', '--port'], {
-    defaultValue: true,
-  });
-  parser.addArgument(['-u', '--url'], {
-    defaultValue: true,
-  });
-  expect(envflags({ PORT: 8080, URL: 'https:mydomain.com' })).toBeInstanceOf(parser);
+  const parser2 = argparse.ArgumentParser();
+  expect(envflags(parser2, { PORT: 8080, URL: 'https://mydomain.com' })).toBeInstanceOf(
+    argparse.ArgumentParser,
+  );
 });
 
 it('should match value of argparse', () => {
@@ -23,6 +26,8 @@ it('should match value of argparse', () => {
     defaultValue: 8080,
   });
   const argValues = parser.parseArgs();
-  const envFlagValues = envflags({ PORT: 8080, ignore: true }).parseArgs();
+
+  const parser2 = argparse.ArgumentParser();
+  const envFlagValues = envflags(parser2, { PORT: 8080, ignore: true }).parseArgs();
   expect(envFlagValues).toMatchObject(argValues);
 });

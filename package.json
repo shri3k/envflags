@@ -11,8 +11,11 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "argparse": "^1.0.10",
     "dotenv": "^8.2.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "jsdoc": "^3.6.3"
+  },
+  "peerDependencies": {
+    "argparse": "^1.0.10"
   }
 }
