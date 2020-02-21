@@ -8,8 +8,9 @@ envflags(argparseInstance, [parsedDotenv])
 ```
 
 ### Parameters
-*argparseInstance* - Instance of argparse
-*parsedDotenv* - Simple key/value object or parsed object of argparse
+**argparseInstance** - Instance of argparse  
+
+**parsedDotenv** - Simple key/value object or parsed object of argparse
 
 
 ### Return value
