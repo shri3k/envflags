@@ -7,6 +7,6 @@ Converts keys/fields from [`dotenv`](https://github.com/motdotla/dotenv) to cli 
 const dotenv = require('dotenv');
 const { parsed } = dotenv.config();
 
-const parser = require('envflags')(parsed)
+const parser = require('envflags')(parsed);
 const args = parser.parseArgs();
 ```
