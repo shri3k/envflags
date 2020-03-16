@@ -5,6 +5,18 @@ const ERROR = {
   notAnInstance: Error('First argument must be an instance of argparse'),
 };
 
+const INFO = {
+  noConfig: 'No config passed. Skipping.',
+};
+
+function hasEqualInterface(parserInstance) {
+  const keys = (o) => Object.keys(o);
+  const instanceProps = keys(parserInstance);
+  const argParseProps = keys(argparse);
+
+  return argParseProps.every((k) => instanceProps.includes(k));
+}
+
 /**
  * Adds env keys as flags in the passed argparse instance
  * @param {object} parserInstance - Instance of argparse
@@ -13,8 +25,13 @@ const ERROR = {
  *
  */
 function main(parserInstance, dotenvConfig = {}) {
-  if (!(parserInstance instanceof argparse)) {
+  if (!hasEqualInterface(parserInstance)) {
     throw ERROR.notAnInstance;
+  }
+
+  if (Object.keys(dotenvConfig).length < 1) {
+    console.info(INFO.noconfig);
+    return parserInstance;
   }
 
   const flagMaps = getFlagMap(dotenvConfig);
